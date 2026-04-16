@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # 🧠 Usage Pattern AI — Intelligent User Classifier
 
 Usage Pattern AI is a robust, end-to-end machine learning system designed to analyze user activity data and group users into actionable categories: **High Activity**, **Low Activity**, and **Irregular Usage**. 
@@ -43,8 +42,8 @@ usage-pattern-ai/
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/your-username/usage-pattern-ai.git
-   cd usage-pattern-ai
+   git clone https://github.com/SANTHOSHKS-06/TR-092-LYCARDII.git
+   cd TR-092-LYCARDII
    ```
 
 2. **Install dependencies**:
@@ -68,7 +67,3 @@ usage-pattern-ai/
 
 ---
 Developed by **Team LYCARDII** for **Tensor '26**
-=======
-# pattern-usage-ai
-An AI-powered classification system that analyzes user activity patterns (logins, session duration, actions) to predict engagement and churn risk using a Random Forest Classifier and a premium Glassmorphism UI.
->>>>>>> 85d33edb33721fb77aafb64021359c9e033d2451
