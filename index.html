@@ -77,24 +77,42 @@
             </div>
         </main>
         
-        <section class="glass-card batch-section" style="margin-top: 2rem;">
-            <h2>Batch Analysis (CSV Upload)</h2>
-            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Upload a user_activity.csv to analyze the overall website engagement pattern.</p>
-            
-            <div class="drop-zone" id="drop-zone">
-                <div class="drop-icon">📁</div>
-                <p>Drag & Drop your CSV file here or <span style="color: var(--primary); text-decoration: underline;">click to browse</span></p>
-                <input type="file" id="csv-file-input" accept=".csv" class="hidden">
-            </div>
+        <div class="dashboard secondary-dashboard" style="margin-top: 2rem;">
+            <!-- Wikipedia Section -->
+            <section class="glass-card wiki-section">
+                <h2>🌐 Wikipedia Live Analysis</h2>
+                <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Fetch and analyze live traffic patterns from Wikipedia's "Python" page in real-time.</p>
+                <button type="button" onclick="analyzeWikipedia()" class="wiki-btn" id="wiki-btn">
+                     Analyze Wikipedia Live Traffic
+                </button>
 
-            <div class="batch-results hidden" id="batch-results">
-                <h3>Overall Website Pattern</h3>
-                <p style="margin-bottom: 1rem; color: var(--text-muted);">Total Users Analyzed: <strong id="batch-total" style="color: white;">0</strong></p>
-                <div class="distribution-bars" id="distribution-bars">
-                    <!-- Dynamic Bars injected by JS -->
+                <div class="batch-results hidden" id="wiki-results">
+                    <h3>Wikipedia Traffic Pattern</h3>
+                    <p style="margin-bottom: 1rem; color: var(--text-muted);">Data points analyzed: <strong id="wiki-total" style="color: white;">0</strong></p>
+                    <div class="distribution-bars" id="wiki-distribution-bars"></div>
+                    <div id="wiki-insight" class="insight-box hidden"></div>
                 </div>
-            </div>
-        </section>
+            </section>
+
+            <!-- Batch Upload Section -->
+            <section class="glass-card batch-section">
+                <h2>📂 Batch Analysis (CSV)</h2>
+                <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Upload a user_activity.csv to analyze overall behavior patterns.</p>
+                
+                <div class="drop-zone" id="drop-zone">
+                    <div class="drop-icon">📁</div>
+                    <p>Drag & Drop CSV or <span style="color: var(--primary); text-decoration: underline;">browse</span></p>
+                    <input type="file" id="csv-file-input" accept=".csv" class="hidden">
+                </div>
+
+                <div class="batch-results hidden" id="batch-results">
+                    <h3>Overall Pattern</h3>
+                    <p style="margin-bottom: 1rem; color: var(--text-muted);">Total Users: <strong id="batch-total" style="color: white;">0</strong></p>
+                    <div class="distribution-bars" id="distribution-bars"></div>
+                    <div id="developer-insight" class="insight-box hidden"></div>
+                </div>
+            </section>
+        </div>
     </div>
 
     <script src="script.js"></script>
