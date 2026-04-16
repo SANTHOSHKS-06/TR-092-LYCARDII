@@ -7,6 +7,8 @@ Built with a high-performance **FastAPI** backend and a stunning **Glassmorphism
 ## 🚀 Key Features
 
 - **Machine Learning Core**: Uses a pre-trained **Random Forest Classifier** to achieve high accuracy in behavior prediction.
+- **Wikipedia Live Analysis 🌐**: Integrates with the Wikimedia API to analyze real-time user behavior on specific high-traffic pages (e.g., Python).
+- **AI Churn Alert System ⚠️**: Automatically analyzes batch data and provides "Developer Insights" if high churn risks or irregular patterns are detected.
 - **Dynamic Analysis**: Interactive UI with real-time sliders to simulate user behavior and get instant AI feedback.
 - **Batch Processing**: Drag-and-drop CSV upload zone to analyze engagement patterns across hundreds of users simultaneously.
 - **Premium UI/UX**: Modern glassmorphism design with smooth animations, animated background orbs, and color-coded confidence meters.
