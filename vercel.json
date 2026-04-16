@@ -1,0 +1,17 @@
+{
+  "version": 2,
+  "rewrites": [
+    {
+      "source": "/predict",
+      "destination": "/api/main.py"
+    },
+    {
+      "source": "/predict_batch",
+      "destination": "/api/main.py"
+    },
+    {
+      "source": "/health",
+      "destination": "/api/main.py"
+    }
+  ]
+}

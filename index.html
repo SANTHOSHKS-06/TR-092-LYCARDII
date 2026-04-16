@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Usage Pattern AI | Deep Insights</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background-orbs">
+        <div class="orb orb1"></div>
+        <div class="orb orb2"></div>
+        <div class="orb orb3"></div>
+    </div>
+    
+    <div class="container">
+        <header>
+            <h1>Usage Pattern <span>AI</span></h1>
+            <p>Predict user engagement and churn risk with our advanced machine learning classifier.</p>
+        </header>
+        
+        <main class="dashboard">
+            <div class="glass-card form-section">
+                <h2>Analyze User</h2>
+                <form id="prediction-form">
+                    <div class="input-group">
+                        <label for="login_frequency">Login Frequency (per month)</label>
+                        <input type="number" id="login_frequency" value="10" min="1" max="30" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label for="avg_session_duration">Avg Session Duration (mins)</label>
+                        <input type="number" id="avg_session_duration" value="15.0" step="0.1" min="1.0" max="100.0" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="actions_per_session">Actions Per Session</label>
+                        <input type="number" id="actions_per_session" value="10" min="1" max="100" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="days_since_last_login">Days Since Last Login</label>
+                        <input type="number" id="days_since_last_login" value="5" min="0" max="100" required>
+                    </div>
+
+                    <div class="input-group">
+                        <label for="total_sessions">Total Sessions</label>
+                        <input type="number" id="total_sessions" value="30" min="1" max="500" required>
+                    </div>
+
+                    <button type="submit" id="submit-btn">Classify User</button>
+                </form>
+            </div>
+
+            <div class="glass-card result-section" id="result-card">
+                <h2>Prediction Result</h2>
+                <div class="result-placeholder" id="placeholder-msg">
+                    <p>Enter user data and click classify to see AI insights.</p>
+                </div>
+                
+                <div class="result-content hidden" id="result-content">
+                    <div class="prediction-badge" id="emoji-badge">⚪</div>
+                    <h3 id="predicted-category">Loading...</h3>
+                    <div class="confidence-meter">
+                        <div class="meter-fill" id="meter-fill"></div>
+                    </div>
+                    <p class="confidence-text">Confidence: <span id="confidence-val">0%</span></p>
+                    
+                    <div class="class-breakdown">
+                        <h4>Probability Breakdown</h4>
+                        <ul id="breakdown-list">
+                            <!-- Breakdown items injected by JS -->
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </main>
+        
+        <section class="glass-card batch-section" style="margin-top: 2rem;">
+            <h2>Batch Analysis (CSV Upload)</h2>
+            <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Upload a user_activity.csv to analyze the overall website engagement pattern.</p>
+            
+            <div class="drop-zone" id="drop-zone">
+                <div class="drop-icon">📁</div>
+                <p>Drag & Drop your CSV file here or <span style="color: var(--primary); text-decoration: underline;">click to browse</span></p>
+                <input type="file" id="csv-file-input" accept=".csv" class="hidden">
+            </div>
+
+            <div class="batch-results hidden" id="batch-results">
+                <h3>Overall Website Pattern</h3>
+                <p style="margin-bottom: 1rem; color: var(--text-muted);">Total Users Analyzed: <strong id="batch-total" style="color: white;">0</strong></p>
+                <div class="distribution-bars" id="distribution-bars">
+                    <!-- Dynamic Bars injected by JS -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
