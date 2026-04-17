@@ -12,6 +12,10 @@
     {
       "source": "/health",
       "destination": "/api/main.py"
+    },
+    {
+      "source": "/chat",
+      "destination": "/api/main.py"
     }
   ]
 }
