@@ -2,6 +2,8 @@
 
 **Usage Pattern AI** is a state-of-the-art, real-time analytics ecosystem designed to transform raw web telemetry into predictive behavioral intelligence. Developed for the **TENSOR '26** hackathon, this platform moves beyond traditional descriptive analytics, offering a cohesive suite of Machine Learning diagnostics and Generative AI conversational support.
 
+🚀 **[Live Demo: pattern-usage-ai.vercel.app](https://pattern-usage-ai.vercel.app)**
+
 ---
 
 ## 💎 The Vision: From Data to Intelligence
