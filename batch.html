@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mass Intelligence | Usage Pattern AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="theme-batch">
+    <div class="bg-vibe"><div class="bg-orb orb-1"></div><div class="bg-orb orb-2"></div><div class="bg-orb orb-3"></div></div>
+
+    <!-- Top Navigation Bar -->
+    <nav class="top-navbar">
+        <div class="brand-section">
+            <h1 class="prj-title">Usage Pattern Analysis <span style="color: var(--accent);">AI</span></h1>
+
+        </div>
+        <div class="user-profile">A</div>
+    </nav>
+
+    <!-- Enterprise Sidebar -->
+    <nav class="sidebar">
+        <div class="workspace-header">
+            <div class="workspace-dot"></div>
+            <span>AI Workspace</span>
+        </div>
+        
+        <ul class="nav-links">
+            <li class="nav-item">
+                <a href="index.html">
+                    <span class="icon">🔍</span>
+                    <span>Single Prediction</span>
+                </a>
+                <div class="active-marker"></div>
+            </li>
+            <li class="nav-item">
+                <a href="batch.html" class="active">
+                    <span class="icon">📁</span>
+                    <span>Batch Pipeline</span>
+                </a>
+                <div class="active-marker"></div>
+            </li>
+            <li class="nav-item">
+                <a href="wikipedia.html">
+                    <span class="icon">🌐</span>
+                    <span>Global Live Stream</span>
+                </a>
+                <div class="active-marker"></div>
+            </li>
+        </ul>
+    </nav>
+
+    <main class="main-wrapper" style="margin-top: var(--header-height);">
+        <header class="section-header">
+            <h1>Enterprise Batch Analysis</h1>
+
+        </header>
+
+        <div class="bento-grid" style="grid-template-columns: 1fr;">
+            <div class="card">
+                <h3 class="card-title">📂 DATA PIPELINE INGESTION</h3>
+                <div class="drop-zone-premium" id="drop-zone">
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">📁</div>
+                    <p>Drop multi-user CSV dataset here or <strong>browse local storage</strong></p>
+                    <input type="file" id="csv-file-input" accept=".csv" class="hidden">
+                    <p style="font-size: 0.75rem; color: var(--text-dim); margin-top: 1rem;">Supports .csv behavioral telemetry formats</p>
+                </div>
+
+                <div id="batch-results" class="hidden" style="margin-top: 3rem; border-top: 1px solid var(--border-light); padding-top: 2.5rem;">
+                    <div style="margin-bottom: 2.5rem;">
+                        <div style="font-size: 0.7rem; color: var(--text-dim); text-transform: uppercase; letter-spacing: 1px;">Population Size</div>
+                        <div id="batch-total" style="font-size: 2rem; font-weight: 800;">0</div>
+                    </div>
+
+                    <div id="distribution-bars">
+                        <!-- Bars injected by JS -->
+                    </div>
+
+                    <div id="developer-insight" class="insight-premium hidden"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="charts-grid">
+            <div class="card">
+                <h3 class="card-title">🍩 DIVERSITY PROFILE</h3>
+                <div id="batch-donut-container" class="chart-box">
+                    <div style="text-align: center; padding: 6rem 0; color: var(--text-dim);">Awaiting data ingestion...</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">📊 SEGMENT COMPARISON</h3>
+                <div id="batch-bar-container" class="chart-box">
+                    <div style="text-align: center; padding: 6rem 0; color: var(--text-dim);">Awaiting analysis...</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -3,118 +3,134 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Usage Pattern AI | Deep Insights</title>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <title>Predict Intelligence | Usage Pattern AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    <div class="background-orbs">
-        <div class="orb orb1"></div>
-        <div class="orb orb2"></div>
-        <div class="orb orb3"></div>
+<body class="theme-hub">
+    <!-- Animated Theme Layers -->
+    <div class="bg-vibe">
+        <div class="bg-orb orb-1"></div>
+        <div class="bg-orb orb-2"></div>
+        <div class="bg-orb orb-3"></div>
     </div>
-    
-    <div class="container">
-        <header>
-            <h1>Usage Pattern <span>AI</span></h1>
-            <p>Predict user engagement and churn risk with our advanced machine learning classifier.</p>
-        </header>
+
+    <!-- Top Navigation Bar -->
+    <nav class="top-navbar">
+        <div class="brand-section">
+            <h1 class="prj-title">Usage Pattern Analysis <span style="color: var(--accent);">AI</span></h1>
+
+        </div>
+        <div class="user-profile">A</div>
+    </nav>
+
+    <!-- Enterprise Sidebar -->
+    <nav class="sidebar">
+        <div class="workspace-header">
+            <div class="workspace-dot"></div>
+            <span>AI Workspace</span>
+        </div>
         
-        <main class="dashboard">
-            <div class="glass-card form-section">
-                <h2>Analyze User</h2>
-                <form id="prediction-form">
-                    <div class="input-group">
-                        <label for="login_frequency">Login Frequency (per month)</label>
-                        <input type="number" id="login_frequency" value="10" min="1" max="30" required>
+        <ul class="nav-links">
+            <li class="nav-item">
+                <a href="index.html" class="active">
+                    <span class="icon">🔍</span>
+                    <span>Single Prediction</span>
+                </a>
+                <div class="active-marker"></div>
+            </li>
+            <li class="nav-item">
+                <a href="batch.html">
+                    <span class="icon">📁</span>
+                    <span>Batch Pipeline</span>
+                </a>
+                <div class="active-marker"></div>
+            </li>
+            <li class="nav-item">
+                <a href="wikipedia.html">
+                    <span class="icon">🌐</span>
+                    <span>Global Live Stream</span>
+                </a>
+                <div class="active-marker"></div>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- Main Experience Area -->
+    <main class="main-wrapper" style="margin-top: var(--header-height);">
+        <header class="section-header">
+            <h1>Behavioral Intelligence</h1>
+
+        </header>
+
+        <div class="bento-grid">
+            <!-- Classification Input -->
+            <div class="card">
+                <h3 class="card-title">🔍 ANALYSIS PORTAL</h3>
+                <form id="prediction-form" class="input-stack">
+                    <div class="field">
+                        <label for="login_frequency">Login Freq (per month)</label>
+                        <input type="number" id="login_frequency" value="10">
                     </div>
                     
-                    <div class="input-group">
-                        <label for="avg_session_duration">Avg Session Duration (mins)</label>
-                        <input type="number" id="avg_session_duration" value="15.0" step="0.1" min="1.0" max="100.0" required>
+                    <div class="field">
+                        <label for="avg_session_duration">Avg. Session (mins)</label>
+                        <input type="number" id="avg_session_duration" value="15.0" step="0.1">
                     </div>
 
-                    <div class="input-group">
-                        <label for="actions_per_session">Actions Per Session</label>
-                        <input type="number" id="actions_per_session" value="10" min="1" max="100" required>
+                    <div class="field">
+                        <label for="actions_per_session">Interaction Volume</label>
+                        <input type="number" id="actions_per_session" value="12">
                     </div>
 
-                    <div class="input-group">
-                        <label for="days_since_last_login">Days Since Last Login</label>
-                        <input type="number" id="days_since_last_login" value="5" min="0" max="100" required>
+                    <div class="field">
+                        <label for="days_since_last_login">Recency Gap (days)</label>
+                        <input type="number" id="days_since_last_login" value="3">
                     </div>
 
-                    <div class="input-group">
-                        <label for="total_sessions">Total Sessions</label>
-                        <input type="number" id="total_sessions" value="30" min="1" max="500" required>
+                    <div class="field">
+                        <label for="total_sessions">Cumulative Sessions</label>
+                        <input type="number" id="total_sessions" value="45">
                     </div>
 
-                    <button type="submit" id="submit-btn">Classify User</button>
+                    <button type="submit" id="submit-btn" class="btn-premium">Execute Neural Classification</button>
                 </form>
             </div>
 
-            <div class="glass-card result-section" id="result-card">
-                <h2>Prediction Result</h2>
-                <div class="result-placeholder" id="placeholder-msg">
-                    <p>Enter user data and click classify to see AI insights.</p>
+            <!-- Insights / Result -->
+            <div class="card">
+                <h3 class="card-title">💡 PREDICTIVE INSIGHTS</h3>
+                <div id="placeholder-msg" style="text-align: center; padding: 6rem 0; color: var(--text-dim);">
+                    <div style="font-size: 4rem; filter: grayscale(1); opacity: 0.5; margin-bottom: 2rem;">🧠</div>
+                    <p style="font-style: italic;">Awaiting telemetry data input...</p>
                 </div>
-                
-                <div class="result-content hidden" id="result-content">
-                    <div class="prediction-badge" id="emoji-badge">⚪</div>
-                    <h3 id="predicted-category">Loading...</h3>
-                    <div class="confidence-meter">
-                        <div class="meter-fill" id="meter-fill"></div>
-                    </div>
-                    <p class="confidence-text">Confidence: <span id="confidence-val">0%</span></p>
+
+                <div id="result-content" class="hidden" style="text-align: center;">
+                    <div style="font-size: 5rem; margin-bottom: 1.5rem;" id="emoji-badge">⚪</div>
+                    <h2 id="predicted-category" style="font-size: 2.25rem; font-weight: 800; text-transform: capitalize; margin-bottom: 2rem;">Predicting...</h2>
                     
-                    <div class="class-breakdown">
-                        <h4>Probability Breakdown</h4>
-                        <ul id="breakdown-list">
-                            <!-- Breakdown items injected by JS -->
+                    <div style="margin-bottom: 3rem;">
+                        <div class="dist-meta">
+                            <span>Engine Confidence</span>
+                            <strong id="confidence-val">0%</strong>
+                        </div>
+                        <div class="dist-rail">
+                            <div class="dist-fill" id="meter-fill" style="width: 0%; background: var(--primary);"></div>
+                        </div>
+                    </div>
+
+                    <div style="background: #ffffff; border-radius: 24px; padding: 2.5rem; text-align: left; border: 2px solid #000000; box-shadow: 0 4px 12px rgba(0,0,0,0.03);">
+                        <h4 style="font-size: 0.85rem; color: #000000; text-transform: uppercase; font-weight: 800; letter-spacing: 2px; margin-bottom: 2rem;">Probability Distribution</h4>
+                        <ul id="breakdown-list" style="list-style: none;">
+                            <!-- Items injected by JS -->
                         </ul>
                     </div>
                 </div>
             </div>
-        </main>
-        
-        <div class="dashboard secondary-dashboard" style="margin-top: 2rem;">
-            <!-- Wikipedia Section -->
-            <section class="glass-card wiki-section">
-                <h2>🌐 Wikipedia Live Analysis</h2>
-                <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Fetch and analyze live traffic patterns from Wikipedia's "Python" page in real-time.</p>
-                <button type="button" onclick="analyzeWikipedia()" class="wiki-btn" id="wiki-btn">
-                     Analyze Wikipedia Live Traffic
-                </button>
-
-                <div class="batch-results hidden" id="wiki-results">
-                    <h3>Wikipedia Traffic Pattern</h3>
-                    <p style="margin-bottom: 1rem; color: var(--text-muted);">Data points analyzed: <strong id="wiki-total" style="color: white;">0</strong></p>
-                    <div class="distribution-bars" id="wiki-distribution-bars"></div>
-                    <div id="wiki-insight" class="insight-box hidden"></div>
-                </div>
-            </section>
-
-            <!-- Batch Upload Section -->
-            <section class="glass-card batch-section">
-                <h2>📂 Batch Analysis (CSV)</h2>
-                <p style="color: var(--text-muted); margin-bottom: 1.5rem;">Upload a user_activity.csv to analyze overall behavior patterns.</p>
-                
-                <div class="drop-zone" id="drop-zone">
-                    <div class="drop-icon">📁</div>
-                    <p>Drag & Drop CSV or <span style="color: var(--primary); text-decoration: underline;">browse</span></p>
-                    <input type="file" id="csv-file-input" accept=".csv" class="hidden">
-                </div>
-
-                <div class="batch-results hidden" id="batch-results">
-                    <h3>Overall Pattern</h3>
-                    <p style="margin-bottom: 1rem; color: var(--text-muted);">Total Users: <strong id="batch-total" style="color: white;">0</strong></p>
-                    <div class="distribution-bars" id="distribution-bars"></div>
-                    <div id="developer-insight" class="insight-box hidden"></div>
-                </div>
-            </section>
         </div>
-    </div>
+    </main>
 
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="script.js"></script>
 </body>
 </html>

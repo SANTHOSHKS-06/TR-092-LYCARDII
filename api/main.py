@@ -89,8 +89,14 @@ def predict_batch(req: BatchRequest):
     
     return {
         "total": len(predictions),
-        "distribution": distribution
+        "distribution": distribution,
+        "predictions": predictions.tolist()
     }
+
+import urllib.request
+import json
+
+
 
 @app.get("/health")
 def health():
