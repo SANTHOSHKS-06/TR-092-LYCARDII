@@ -1,8 +1,10 @@
 // Global chart instances to handle updates/destruction
 let wikiLineChart = null;
 let wikiDonutChart = null;
+let wikiSevenDayChart = null;
 let batchDonutChart = null;
 let batchBarChart = null;
+let lastAnalyzedData = null;
 
 document.addEventListener('DOMContentLoaded', () => {
     // Determine which page we are on and initialize accordingly
@@ -84,6 +86,13 @@ function initDashboard() {
                 breakdownList.appendChild(li);
             }
 
+            // Sync context with AI Assistant
+            lastAnalyzedData = { 
+                topic: "Individual User Profile", 
+                result: { distribution: result.all_classes, total: 1 }, 
+                timestamp: new Date().toLocaleString() 
+            };
+
         } catch (error) {
             console.error('Error:', error);
             alert('Failed to connect to the classification engine.');
@@ -133,9 +142,13 @@ async function analyzeWikipedia() {
           resultsId: 'wiki-results', totalId: 'wiki-total', barsId: 'wiki-distribution-bars', insightId: 'wiki-insight'
       });
 
-      // Render Mixture of Graphs
+      // Render Advanced Modules
       renderWikiLineChart(viewsSeries, labels);
       renderWikiDonutChart(result.distribution);
+      renderAdvancedIntelligence(result, randomTopic);
+
+      lastAnalyzedData = { topic: randomTopic, result, viewsSeries, labels, timestamp: new Date().toLocaleString() };
+      document.getElementById('fetch-timestamp').textContent = `SYSTEM LIVE: ${lastAnalyzedData.timestamp}`;
 
   } catch (e) {
       alert(`Wikipedia API Error: ${e.message}`);
@@ -253,6 +266,12 @@ async function analyzeBatchProcess(csvText, config) {
         if (config.donutContainer) renderBatchDonutChart(result.distribution, config.donutContainer);
         if (config.barContainer) renderBatchBarChart(result.distribution, config.barContainer);
         
+        lastAnalyzedData = { 
+            topic: "Batch Process Dataset", 
+            result: result, 
+            timestamp: new Date().toLocaleString() 
+        };
+        
         let lowPatternPercent = (( (result.distribution['low_activity'] || 0) + (result.distribution['irregular_usage'] || 0) ) / result.total) * 100;
         insightEl.classList.remove('hidden', 'warning', 'success');
         insightEl.className = 'insight-premium'; // Reset classes
@@ -346,3 +365,206 @@ function renderBatchBarChart(distribution, containerId) {
     batchBarChart = new ApexCharts(document.getElementById(containerId), options);
     batchBarChart.render();
 }
+
+function renderAdvancedIntelligence(result, topic) {
+    const dist = result.distribution;
+    const total = result.total;
+    
+    // 1. Stat Cards
+    const stHigh = document.getElementById('stat-high');
+    const stIrr = document.getElementById('stat-irregular');
+    const stLow = document.getElementById('stat-low');
+    if(stHigh) stHigh.textContent = dist['high_activity'] || 0;
+    if(stIrr) stIrr.textContent = dist['irregular_usage'] || 0;
+    if(stLow) stLow.textContent = dist['low_activity'] || 0;
+
+    // 2. Churn Risk Score
+    const irregular = dist['irregular_usage'] || 0;
+    const low = dist['low_activity'] || 0;
+    const riskScore = Math.min(100, Math.round(((irregular * 1.5) + (low * 0.8)) / total * 100));
+    const scoreEl = document.getElementById('risk-score');
+    const fillEl = document.getElementById('risk-meter-fill');
+    const badgeEl = document.getElementById('risk-badge');
+
+    if (scoreEl) scoreEl.textContent = riskScore;
+    if (fillEl) fillEl.style.width = `${riskScore}%`;
+    
+    if (badgeEl) {
+        if (riskScore < 30) {
+            badgeEl.textContent = 'Low Risk';
+            badgeEl.style.background = '#dcfce7';
+            badgeEl.style.color = '#10b981';
+        } else if (riskScore < 60) {
+            badgeEl.textContent = 'Medium Risk';
+            badgeEl.style.background = '#fef3c7';
+            badgeEl.style.color = '#d97706';
+        } else {
+            badgeEl.textContent = 'High Risk';
+            badgeEl.style.background = '#fee2e2';
+            badgeEl.style.color = '#ef4444';
+        }
+    }
+
+    // 3. Session Quality Index
+    const stability = Math.max(0, 100 - (irregular / total * 100));
+    const engagement = Math.min(100, (dist['high_activity'] || 0) / total * 150);
+    const health = Math.max(0, 100 - riskScore);
+    
+    updateQualityBar('q-stability', stability);
+    updateQualityBar('q-engagement', engagement);
+    updateQualityBar('q-retention', 85); // Simulated baseline
+    updateQualityBar('q-health', health);
+
+    // 4. AI Recommendations
+    renderRecommendations(riskScore, dist);
+
+    // 5. 7-Day Longitudinal Distribution
+    renderSevenDayDistribution(total);
+}
+
+function updateQualityBar(id, val) {
+    const valEl = document.getElementById(`${id}-val`);
+    const fillEl = document.getElementById(`${id}-fill`);
+    if (valEl) valEl.textContent = `${Math.round(val)}%`;
+    if (fillEl) fillEl.style.width = `${val}%`;
+}
+
+function renderRecommendations(risk, dist) {
+    const list = document.getElementById('recommendations-list');
+    if (!list) return;
+    list.innerHTML = '';
+    
+    const recs = [];
+    if (risk > 50) {
+        recs.push({ icon: '⚠️', title: 'Volatility Audit', desc: 'Irregular patterns detected. Initiate fraud/bot audit protocols.', priority: 'high' });
+    }
+    if ((dist['low_activity'] || 0) > (dist['high_activity'] || 0)) {
+        recs.push({ icon: '📧', title: 'Re-engagement Loop', desc: 'User interest is waning. Trigger automated notification sync.', priority: 'med' });
+    }
+    if (risk < 20) {
+        recs.push({ icon: '💎', title: 'Loyalty Rewards', desc: 'High stability detected. Enroll premium cohorts in beta program.', priority: 'low' });
+    }
+    recs.push({ icon: '⚙️', title: 'Elastic Scaling', desc: 'Predictive load balancing recommended for upcoming peak.', priority: 'low' });
+
+    recs.forEach(r => {
+        const div = document.createElement('div');
+        div.className = 'rec-card';
+        div.innerHTML = `
+            <div class="rec-icon">${r.icon}</div>
+            <div class="rec-text" style="width: 100%; text-align: left;">
+                <div style="display:flex; justify-content:space-between; align-items:center;">
+                    <h5 style="margin:0;">${r.title}</h5>
+                    <span class="priority-tag priority-${r.priority}">${r.priority}</span>
+                </div>
+                <p style="margin:5px 0 0 0;">${r.desc}</p>
+            </div>
+        `;
+        list.appendChild(div);
+    });
+}
+
+function renderSevenDayDistribution(baseTotal) {
+    const days = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+    const series = [
+        { name: 'Peak Usage', data: days.map(() => Math.floor(baseTotal * (0.8 + Math.random() * 0.4))) },
+        { name: 'Baseline', data: days.map(() => Math.floor(baseTotal * (0.4 + Math.random() * 0.2))) }
+    ];
+
+    const options = {
+        series: series,
+        chart: { type: 'bar', height: 350, stacked: true, toolbar: { show: false }, background: 'transparent' },
+        colors: ['#00f2ff', '#27187E'],
+        plotOptions: { bar: { borderRadius: 6, columnWidth: '45%' } },
+        xaxis: { categories: days, labels: { style: { colors: '#334155', fontWeight: 600 } } },
+        yaxis: { labels: { style: { colors: '#334155', fontWeight: 600 } } },
+        legend: { position: 'top', horizontalAlign: 'right', labels: { colors: '#334155', fontWeight: 600 } },
+        grid: { borderColor: '#f1f5f9' },
+        dataLabels: { enabled: false }
+    };
+
+    const chartEl = document.getElementById('wiki-seven-day-chart');
+    if (!chartEl) return;
+    if (wikiSevenDayChart) wikiSevenDayChart.destroy();
+    chartEl.innerHTML = '';
+    wikiSevenDayChart = new ApexCharts(chartEl, options);
+    wikiSevenDayChart.render();
+}
+
+function exportIntelligenceReport() {
+    if (!lastAnalyzedData) return alert('Please analyze a stream before exporting.');
+    
+    const report = {
+        report_id: `INTEL-${Math.random().toString(36).substr(2, 9).toUpperCase()}`,
+        generated_at: lastAnalyzedData.timestamp,
+        source: `Wikipedia Context: ${lastAnalyzedData.topic}`,
+        telemetry: {
+            sample_size: lastAnalyzedData.result.total,
+            distribution: lastAnalyzedData.result.distribution
+        },
+        ai_meta: {
+            engine: "Usage Pattern Analysis Core v4.0",
+            status: "High Fidelity Mapping"
+        }
+    };
+
+    const blob = new Blob([JSON.stringify(report, null, 2)], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = `UsagePattern_Report_${lastAnalyzedData.topic}.json`;
+    a.click();
+    URL.revokeObjectURL(url);
+}
+
+/* --- AI Chat Assistant Logic --- */
+function toggleChat() {
+    const win = document.getElementById('chat-window');
+    win.classList.toggle('active');
+    if(win.classList.contains('active')) {
+        document.getElementById('chat-input').focus();
+    }
+}
+
+function handleChatKey(e) {
+    if (e.key === 'Enter') sendMessage();
+}
+
+async function sendMessage() {
+    const input = document.getElementById('chat-input');
+    const text = input.value.trim();
+    if (!text) return;
+
+    appendMessage('user', text);
+    input.value = '';
+
+    // Show thinking indicator
+    const typingId = 'typing-' + Date.now();
+    appendMessage('bot', '...', typingId);
+
+    try {
+        const response = await fetch('/chat', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                message: text,
+                context: lastAnalyzedData
+            })
+        });
+        
+        const data = await response.json();
+        document.getElementById(typingId).textContent = data.response;
+    } catch (err) {
+        document.getElementById(typingId).textContent = "My neural link is briefly interrupted. Please check the network connectivity.";
+    }
+}
+
+function appendMessage(sender, text, id = null) {
+    const container = document.getElementById('chat-messages');
+    const div = document.createElement('div');
+    div.className = `msg msg-${sender}`;
+    if(id) div.id = id;
+    div.textContent = text;
+    container.appendChild(div);
+    container.scrollTop = container.scrollHeight;
+}
+

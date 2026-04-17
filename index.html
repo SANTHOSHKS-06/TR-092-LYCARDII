@@ -132,5 +132,28 @@
 
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="script.js"></script>
+
+    <!-- AI Assistant Chatbot -->
+    <div class="ai-chat-bubble" onclick="toggleChat()">
+        <span style="font-size: 1.8rem;">🤖</span>
+    </div>
+
+    <div class="ai-chat-window" id="chat-window">
+        <div class="chat-header">
+            <div class="status-dot"></div>
+            <div style="font-weight: 800; font-size: 1.1rem;">AI Intelligence Assistant</div>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <div class="msg msg-bot">
+                Hello Developer! I'm your AI Analysis Assistant. Ask me anything about user patterns, risk scores, or improvement suggestions.
+            </div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chat-input" class="chat-input" placeholder="Ask about patterns..." onkeypress="handleChatKey(event)">
+            <button class="chat-send-btn" onclick="sendMessage()">
+                <span style="font-size: 1.2rem;">🚀</span>
+            </button>
+        </div>
+    </div>
 </body>
 </html>

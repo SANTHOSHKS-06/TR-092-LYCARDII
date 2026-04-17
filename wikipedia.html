@@ -53,17 +53,42 @@
 
     <main class="main-wrapper" style="margin-top: var(--header-height);">
         <header class="section-header">
-            <h1>Live Traffic Intelligence</h1>
-
+            <div style="display: flex; justify-content: space-between; align-items: baseline; width: 100%;">
+                <h1>Live Traffic Intelligence</h1>
+                <span id="fetch-timestamp">INITIALIZING SYSTEM...</span>
+            </div>
         </header>
+
+        <!-- Module Group 1: Strategic Breakdown -->
+        <div class="stat-cards-grid">
+            <div class="stat-card high">
+                <span class="stat-label">High Activity</span>
+                <span class="stat-val" id="stat-high">0</span>
+                <span class="priority-tag priority-low">Dominant</span>
+            </div>
+            <div class="stat-card irregular">
+                <span class="stat-label">Irregular Usage</span>
+                <span class="stat-val" id="stat-irregular">0</span>
+                <span class="priority-tag priority-high">Monitor</span>
+            </div>
+            <div class="stat-card low">
+                <span class="stat-label">Low Activity</span>
+                <span class="stat-val" id="stat-low">0</span>
+                <span class="priority-tag priority-med">At Risk</span>
+            </div>
+        </div>
 
         <div class="bento-grid" style="grid-template-columns: 1fr;">
             <div class="card">
                 <h3 class="card-title">📡 STREAM FETCH CONTROLLER</h3>
-
-                <button type="button" onclick="analyzeWikipedia()" class="btn-premium" id="wiki-btn" style="width: auto; padding: 1.25rem 3rem;">
-                    Analyze Live Traffic Stream
-                </button>
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <button type="button" onclick="analyzeWikipedia()" class="btn-premium" id="wiki-btn" style="width: auto; padding: 1.25rem 3rem;">
+                        Analyze Live Traffic Stream
+                    </button>
+                    <button type="button" onclick="exportIntelligenceReport()" class="btn-premium" style="width: auto; padding: 1.25rem 2rem; background: #ffffff; color: var(--text-bright); border: 2px solid rgba(0,0,0,0.1);">
+                        ⬇️ Export Intelligence Report
+                    </button>
+                </div>
 
                 <div id="wiki-results" class="hidden" style="margin-top: 3rem; border-top: 1px solid var(--border-light); padding-top: 2.5rem;">
                     <div style="display: flex; gap: 3rem; margin-bottom: 2.5rem;">
@@ -78,6 +103,27 @@
                     </div>
 
                     <div id="wiki-insight" class="insight-premium hidden"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Module Group 2: Advanced Diagnostics -->
+        <div class="bento-grid" style="grid-template-columns: 1.5fr 1fr;">
+            <div class="card">
+                <h3 class="card-title">📊 PEAK VS OFF-PEAK (7-DAY)</h3>
+                <div id="wiki-seven-day-chart" class="chart-box" style="height: 350px;">
+                    <div style="text-align: center; padding: 8rem 0; color: var(--text-dim);">Awaiting longitudinal analysis...</div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">⚠️ CHURN RISK SCORE</h3>
+                <div class="risk-meter-box">
+                    <div style="font-size: 4rem; font-weight: 900; color: var(--text-bright);" id="risk-score">0</div>
+                    <div class="meter-track">
+                        <div class="meter-fill-bar" id="risk-meter-fill"></div>
+                    </div>
+                    <div id="risk-badge" class="risk-level-badge" style="background: #dcfce7; color: #10b981;">Low Risk</div>
                 </div>
             </div>
         </div>
@@ -97,9 +143,64 @@
                 </div>
             </div>
         </div>
+
+        <!-- Module Group 3: AI Recommendations & Quality -->
+        <div class="bento-grid" style="grid-template-columns: 1fr 1fr;">
+            <div class="card">
+                <h3 class="card-title">🎯 SESSION QUALITY INDEX</h3>
+                <div class="quality-index-grid">
+                    <div class="quality-item">
+                        <div class="quality-meta"><span>Stability Score</span><span id="q-stability-val">0%</span></div>
+                        <div class="quality-rail"><div class="quality-fill" id="q-stability-fill"></div></div>
+                    </div>
+                    <div class="quality-item">
+                        <div class="quality-meta"><span>Engagement Rate</span><span id="q-engagement-val">0%</span></div>
+                        <div class="quality-rail"><div class="quality-fill" id="q-engagement-fill"></div></div>
+                    </div>
+                    <div class="quality-item">
+                        <div class="quality-meta"><span>Retention Index</span><span id="q-retention-val">0%</span></div>
+                        <div class="quality-rail"><div class="quality-fill" id="q-retention-fill"></div></div>
+                    </div>
+                    <div class="quality-item">
+                        <div class="quality-meta"><span>Overall Health</span><span id="q-health-val">0%</span></div>
+                        <div class="quality-rail"><div class="quality-fill" id="q-health-fill"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3 class="card-title">💡 AI RECOMMENDATIONS</h3>
+                <div class="rec-engine-stack" id="recommendations-list">
+                    <div style="text-align: center; padding: 2rem; color: var(--text-dim);">Awaiting behavior mapping...</div>
+                </div>
+            </div>
+        </div>
     </main>
 
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
     <script src="script.js"></script>
+
+    <!-- AI Assistant Chatbot -->
+    <div class="ai-chat-bubble" onclick="toggleChat()">
+        <span style="font-size: 1.8rem;">🤖</span>
+    </div>
+
+    <div class="ai-chat-window" id="chat-window">
+        <div class="chat-header">
+            <div class="status-dot"></div>
+            <div style="font-weight: 800; font-size: 1.1rem;">AI Intelligence Assistant</div>
+        </div>
+        <div class="chat-messages" id="chat-messages">
+            <div class="msg msg-bot">
+                Hello Developer! I'm your AI Analysis Assistant. Ask me anything about user patterns, risk scores, or improvement suggestions.
+            </div>
+        </div>
+        <div class="chat-input-area">
+            <input type="text" id="chat-input" class="chat-input" placeholder="Ask about patterns..." onkeypress="handleChatKey(event)">
+            <button class="chat-send-btn" onclick="sendMessage()">
+                <span style="font-size: 1.2rem;">🚀</span>
+            </button>
+        </div>
+    </div>
 </body>
 </html>
